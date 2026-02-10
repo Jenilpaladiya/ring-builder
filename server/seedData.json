@@ -1,0 +1,66 @@
+{
+  "metals": [
+    { "id": "met-platinum", "type": "Platinum", "multiplier": 1.2, "swatch": "#d6d6d6" },
+    { "id": "met-18ky", "type": "18K Yellow Gold", "multiplier": 1.0, "swatch": "#d8b24c" },
+    { "id": "met-18kw", "type": "18K White Gold", "multiplier": 1.05, "swatch": "#e6e6e6" },
+    { "id": "met-18kr", "type": "18K Rose Gold", "multiplier": 1.03, "swatch": "#d9a3a3" }
+  ],
+  "ringSettings": [
+    {
+      "id": "set-tara-oval",
+      "name": "Tara Solitaire Oval",
+      "basePrice": 1850,
+      "style": "Solitaire",
+      "imageUrl": "",
+      "compatibleShapes": ["Oval", "Round"]
+    },
+    {
+      "id": "set-jennie-round",
+      "name": "Jennie Solitaire Round",
+      "basePrice": 1900,
+      "style": "Solitaire",
+      "imageUrl": "",
+      "compatibleShapes": ["Round"]
+    },
+    {
+      "id": "set-halo-round",
+      "name": "Classic Halo Round",
+      "basePrice": 2100,
+      "style": "Halo",
+      "imageUrl": "",
+      "compatibleShapes": ["Round", "Oval"]
+    }
+  ],
+  "diamonds": [
+    {
+      "id": "dia-oval-101-e-vs1",
+      "shape": "Oval",
+      "carat": 1.01,
+      "color": "E",
+      "clarity": "VS1",
+      "price": 480,
+      "lab": "IGI",
+      "type": "Lab Grown"
+    },
+    {
+      "id": "dia-oval-103-e-vs2",
+      "shape": "Oval",
+      "carat": 1.03,
+      "color": "E",
+      "clarity": "VS2",
+      "price": 510,
+      "lab": "IGI",
+      "type": "Lab Grown"
+    },
+    {
+      "id": "dia-round-100-f-vs1",
+      "shape": "Round",
+      "carat": 1.0,
+      "color": "F",
+      "clarity": "VS1",
+      "price": 520,
+      "lab": "IGI",
+      "type": "Lab Grown"
+    }
+  ]
+}

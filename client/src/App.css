@@ -1,0 +1,49 @@
+/* --- Global layout --- */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left; /* was center -> makes UI look much better */
+}
+
+/* --- Card text (the text under ring/diamond images) --- */
+/* Make them always readable by giving a dark background chip */
+.cardTitle,
+.cardSub {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  line-height: 1.2;
+  margin: 4px 0;
+}
+
+.cardSub {
+  background: rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+}
+
+/* --- Filter buttons (All / Halo / Solitaire) --- */
+/* IMPORTANT: make ACTIVE button black (your current CSS makes active white) */
+.filterBtn {
+  background: #fff;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.filterBtn.active {
+  background: #111;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.filterBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.filterBtn { background: #fff !important; color:#111 !important; }
+.filterBtn.active { background:#111 !important; color:#fff !important; }

@@ -1,0 +1,18 @@
+{
+  "set-pave-band": {
+    "basePrice": 2250,
+    "compatibleShapes": ["Round", "Oval", "Princess", "Cushion", "Radiant"],
+    "imageUrl": "https://example.com/ring-settings/pave-band.jpg",
+    "name": "Pavé Band",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Pavé"
+  },
+  "set-hidden-halo": {
+    "basePrice": 2450,
+    "compatibleShapes": ["Round", "Oval", "Pear", "Cushion", "Radiant"],
+    "imageUrl": "https://example.com/ring-settings/hidden-halo.jpg",
+    "name": "Hidden Halo",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Hidden Halo"
+  }
+}

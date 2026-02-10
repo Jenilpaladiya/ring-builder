@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Diamonds – Product Grid</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --panel:#111827;
+      --card:#0f172a;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --border:rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(99,102,241,.25), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(16,185,129,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .wrap{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px;
+    }
+    .topbar{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      padding:18px 18px;
+      border:1px solid var(--border);
+      background: rgba(17,24,39,.65);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .title h1{
+      margin:0;
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .title p{
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .grid{
+      margin-top:18px;
+      display:grid;
+      gap:14px;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    @media (min-width: 640px){ .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 980px){ .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 1200px){ .grid{ grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+    .card{
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.65));
+      border-radius: var(--radius);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      display:flex;
+      flex-direction:column;
+      min-height: 100%;
+    }
+    .thumb{
+      position:relative;
+      width:100%;
+      aspect-ratio: 16/10;
+      overflow:hidden;
+      background: rgba(255,255,255,.03);
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.02);
+    }
+    .badge{
+      position:absolute;
+      top:12px;
+      left:12px;
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+    }
+    .body{
+      padding:14px 14px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      flex: 1;
+    }
+    .row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .name{
+      font-weight:700;
+      font-size:14px;
+      line-height:1.3;
+    }
+    .price{
+      font-weight:800;
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .meta{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      padding-top:6px;
+      border-top: 1px dashed rgba(255,255,255,.12);
+    }
+    .kv{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width:0;
+    }
+    .k{
+      font-size:11px;
+      color:var(--muted);
+    }
+    .v{
+      font-size:13px;
+      font-weight:600;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .foot{
+      padding:0 14px 14px;
+      color:var(--muted);
+      font-size:11px;
+    }
+    .empty{
+      margin-top:18px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(17,24,39,.45);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="title">
+        <h1>Diamonds (Firestore-style JSON) – Product Grid</h1>
+        <p id="sub">Loading…</p>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:11px;color:var(--muted)">Data embedded inside this HTML</div>
+        <div style="font-size:12px;font-weight:700">No extra fields</div>
+      </div>
+    </div>
+
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty" style="display:none">No products to show.</div>
+  </div>
+
+  <script>
+    // ✅ EXACT SAME FIELDS as your screenshot/data (no extra fields added)
+    const diamonds = {
+      "dia-oval-101-e-vs1": {
+        "carat": 1.01,
+        "clarity": "VS1",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-oval-101-e-vs1.jpg",
+        "lab": "IGI",
+        "price": 480,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Oval",
+        "type": "Lab Grown"
+      },
+      "dia-oval-103-e-vs2": {
+        "carat": 1.03,
+        "clarity": "VS2",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-oval-103-e-vs2.jpg",
+        "lab": "IGI",
+        "price": 460,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Oval",
+        "type": "Lab Grown"
+      },
+      "dia-round-100-f-vs1": {
+        "carat": 1.0,
+        "clarity": "VS1",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-round-100-f-vs1.jpg",
+        "lab": "IGI",
+        "price": 520,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Round",
+        "type": "Lab Grown"
+      },
+      "dia-round-090-g-vs2": {
+        "carat": 0.9,
+        "clarity": "VS2",
+        "color": "G",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-round-090-g-vs2.jpg",
+        "lab": "IGI",
+        "price": 390,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Round",
+        "type": "Lab Grown"
+      },
+      "dia-round-120-d-vvs2": {
+        "carat": 1.2,
+        "clarity": "VVS2",
+        "color": "D",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-round-120-d-vvs2.jpg",
+        "lab": "IGI",
+        "price": 980,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Round",
+        "type": "Lab Grown"
+      },
+      "dia-princess-110-f-vs2": {
+        "carat": 1.1,
+        "clarity": "VS2",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-princess-110-f-vs2.jpg",
+        "lab": "IGI",
+        "price": 540,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Princess",
+        "type": "Lab Grown"
+      },
+      "dia-cushion-150-e-vs1": {
+        "carat": 1.5,
+        "clarity": "VS1",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-cushion-150-e-vs1.jpg",
+        "lab": "IGI",
+        "price": 1050,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Cushion",
+        "type": "Lab Grown"
+      },
+      "dia-emerald-140-f-vvs1": {
+        "carat": 1.4,
+        "clarity": "VVS1",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-emerald-140-f-vvs1.jpg",
+        "lab": "IGI",
+        "price": 1100,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Emerald",
+        "type": "Lab Grown"
+      },
+      "dia-pear-100-g-vs1": {
+        "carat": 1.0,
+        "clarity": "VS1",
+        "color": "G",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-pear-100-g-vs1.jpg",
+        "lab": "IGI",
+        "price": 450,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Pear",
+        "type": "Lab Grown"
+      },
+      "dia-marquise-130-h-si1": {
+        "carat": 1.3,
+        "clarity": "SI1",
+        "color": "H",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-marquise-130-h-si1.jpg",
+        "lab": "IGI",
+        "price": 520,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Marquise",
+        "type": "Lab Grown"
+      },
+      "dia-radiant-160-f-vs2": {
+        "carat": 1.6,
+        "clarity": "VS2",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-radiant-160-f-vs2.jpg",
+        "lab": "IGI",
+        "price": 1120,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Radiant",
+        "type": "Lab Grown"
+      },
+      "dia-asscher-125-e-vs1": {
+        "carat": 1.25,
+        "clarity": "VS1",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-asscher-125-e-vs1.jpg",
+        "lab": "IGI",
+        "price": 860,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Asscher",
+        "type": "Lab Grown"
+      },
+      "dia-heart-090-f-vs1": {
+        "carat": 0.9,
+        "clarity": "VS1",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-heart-090-f-vs1.jpg",
+        "lab": "IGI",
+        "price": 420,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Heart",
+        "type": "Lab Grown"
+      },
+      "dia-oval-150-d-if": {
+        "carat": 1.5,
+        "clarity": "IF",
+        "color": "D",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-oval-150-d-if.jpg",
+        "lab": "IGI",
+        "price": 1600,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Oval",
+        "type": "Lab Grown"
+      },
+      "dia-round-200-e-vs1": {
+        "carat": 2.0,
+        "clarity": "VS1",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-round-200-e-vs1.jpg",
+        "lab": "IGI",
+        "price": 1900,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Round",
+        "type": "Lab Grown"
+      },
+      "dia-cushion-080-h-vs2": {
+        "carat": 0.8,
+        "clarity": "VS2",
+        "color": "H",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-cushion-080-h-vs2.jpg",
+        "lab": "IGI",
+        "price": 310,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Cushion",
+        "type": "Lab Grown"
+      },
+      "dia-emerald-100-d-vs2": {
+        "carat": 1.0,
+        "clarity": "VS2",
+        "color": "D",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-emerald-100-d-vs2.jpg",
+        "lab": "IGI",
+        "price": 690,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Emerald",
+        "type": "Lab Grown"
+      },
+      "dia-radiant-110-g-vs1": {
+        "carat": 1.1,
+        "clarity": "VS1",
+        "color": "G",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-radiant-110-g-vs1.jpg",
+        "lab": "IGI",
+        "price": 520,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Radiant",
+        "type": "Lab Grown"
+      },
+      "dia-pear-120-e-vvs2": {
+        "carat": 1.2,
+        "clarity": "VVS2",
+        "color": "E",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-pear-120-e-vvs2.jpg",
+        "lab": "IGI",
+        "price": 920,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Pear",
+        "type": "Lab Grown"
+      },
+      "dia-princess-075-f-si1": {
+        "carat": 0.75,
+        "clarity": "SI1",
+        "color": "F",
+        "imageUrl": "https://vkdiamonds.com/cdn/shop/products/dia-princess-075-f-si1.jpg",
+        "lab": "IGI",
+        "price": 260,
+        "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+        "shape": "Princess",
+        "type": "Lab Grown"
+      }
+    };
+
+    const fmtPrice = new Intl.NumberFormat(undefined, { style: "currency", currency: "EUR" });
+
+    function toTitle(id) {
+      // Pretty label from id (keeps it simple)
+      // dia-oval-101-e-vs1 -> Oval • 1.01 ct • E • VS1
+      const p = id.split("-");
+      const shape = (p[1] || "").toUpperCase() ? (p[1][0].toUpperCase() + p[1].slice(1)) : id;
+      const carat = p[2] ? (Number(p[2]) / 100).toFixed(2) : "";
+      const color = p[3] ? p[3].toUpperCase() : "";
+      const clarity = p[4] ? p[4].toUpperCase() : "";
+      return `${shape} • ${carat} ct • ${color} • ${clarity}`;
+    }
+
+    function render() {
+      const entries = Object.entries(diamonds);
+      const grid = document.getElementById("grid");
+      const empty = document.getElementById("empty");
+      const sub = document.getElementById("sub");
+
+      sub.textContent = `${entries.length} products loaded`;
+
+      if (!entries.length) {
+        empty.style.display = "block";
+        grid.innerHTML = "";
+        return;
+      }
+      empty.style.display = "none";
+
+      grid.innerHTML = entries.map(([id, d]) => {
+        const safeId = String(id).replace(/"/g, "&quot;");
+        return `
+          <article class="card" data-id="${safeId}">
+            <div class="thumb">
+              <span class="badge">${d.shape}</span>
+              <img
+                src="${d.imageUrl}"
+                alt="${safeId}"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23111827%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%239ca3af%22 font-family=%22Arial%22 font-size=%2220%22>Image not available</text></svg>';"
+              />
+            </div>
+
+            <div class="body">
+              <div class="row">
+                <div class="name">${toTitle(id)}</div>
+                <div class="price">${fmtPrice.format(Number(d.price) || 0)}</div>
+              </div>
+
+              <div class="meta">
+                <div class="kv"><div class="k">ID</div><div class="v">${id}</div></div>
+                <div class="kv"><div class="k">Carat</div><div class="v">${d.carat}</div></div>
+
+                <div class="kv"><div class="k">Color</div><div class="v">${d.color}</div></div>
+                <div class="kv"><div class="k">Clarity</div><div class="v">${d.clarity}</div></div>
+
+                <div class="kv"><div class="k">Lab</div><div class="v">${d.lab}</div></div>
+                <div class="kv"><div class="k">Type</div><div class="v">${d.type}</div></div>
+              </div>
+            </div>
+
+            <div class="foot">Seeded: ${d.seededAt}</div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+/* IMPORTANT: prevent global styles making button text white */
+.rb-layout,
+.rb-layout * {
+  color: #111;
+  box-sizing: border-box;
+}
+
+
+/* .rb-layout button {
+  color: inherit;
+} */
+.rb-layout button.rb-pill--active  {
+  color: #fff;
+}
+
+/* Layout */
+.rb-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* Sidebar */
+.rb-sidebar {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+  position: sticky;
+  top: 18px;
+}
+
+.rb-sidebarTitle {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #111;
+}
+
+.rb-block {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.rb-blockTitle {
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+/* helpers for font-weight */
+.rb-fw800 { font-weight: 800; }
+.rb-fw500 { font-weight: 500; }
+
+/* Radio */
+.rb-radioList {
+  display: grid;
+  gap: 10px;
+}
+
+.rb-radioRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.rb-dotWrap {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+
+.rb-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--dot, #111);
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* Notes */
+.rb-miniNote {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.8;
+  color: #111;
+}
+
+/* Pills */
+.rb-pillList {
+  display: grid;
+  gap: 8px;
+}
+
+.rb-pill {
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  color: #111;
+}
+
+.rb-pill--active {
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+}
+
+/* Primary button */
+.rb-primaryBtn {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-weight: 800;
+}
+
+.rb-primaryBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Help text */
+.rb-help {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.75;
+  color: #111;
+}
+
+/* Grid wrapper */
+.rb-gridWrap {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+
+.rb-gridHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.rb-gridTitle {
+  font-weight: 800;
+  color: #111;
+}
+
+.rb-gridCount {
+  opacity: 0.75;
+  font-size: 13px;
+  color: #111;
+}
+
+/* Cards grid */
+.rb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Card */
+.rb-card {
+  text-align: left;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  padding: 0;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.rb-card--active {
+  border: 2px solid #111;
+}
+
+/* Image */
+.rb-imgBox {
+  height: 170px;
+  background: #fafafa;
+  display: grid;
+  place-items: center;
+}
+
+.rb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.rb-imgFallback {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+.rb-imgPlaceholder {
+  opacity: 0.6;
+  font-size: 13px;
+  color: #111;
+}
+
+/* Card body text */
+.rb-cardBody {
+  padding: 12px;
+}
+
+.rb-cardName {
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: #111;
+}
+
+.rb-cardMeta {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.rb-muted {
+  opacity: 0.75;
+  color: #111;
+}
+
+.rb-cardMetaSmall {
+  font-size: 12px;
+  opacity: 0.75;
+  line-height: 1.3;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .rb-layout {
+    grid-template-columns: 1fr;
+  }
+  .rb-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .rb-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   STEP 2 – Choose Stone
+========================= */
+
+/* Page wrapper (also overrides #root text-align:center from Vite template) */
+.rb-page {
+  display: grid;
+  gap: 14px;
+  text-align: left;
+}
+
+/* Top bar */
+.rb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.rb-h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #111;
+}
+
+.rb-topRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* small buttons Grid/List */
+.rb-smallBtn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  color: #111;
+  font-weight: 700;
+}
+
+.rb-smallBtn--active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+/* selects */
+.rb-select {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+}
+
+.rb-selectFull {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+}
+
+/* Shape bar */
+.rb-shapeBar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  background: #fff;
+  overflow-x: auto;
+}
+
+.rb-shapeBtn {
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  color: #111;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rb-shapeBtn--active {
+  background: #111;
+  border-color: #111;
+  color: #fff;
+}
+
+/* inputs + rows */
+.rb-label {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.rb-row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rb-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #111;
+  font-weight: 600;
+}
+
+/* sidebar note */
+.rb-compatibleNote {
+  font-size: 13px;
+  opacity: 0.9;
+  color: #111;
+}
+
+.rb-compatibleName {
+  font-weight: 800;
+  margin-top: 6px;
+  color: #111;
+}
+
+/* Results wrapper */
+.rb-results {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+
+.rb-resultsHeader {
+  margin-bottom: 12px;
+}
+
+/* Grid cards */
+.rb-diamondGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rb-diamondCard {
+  text-align: left;
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.rb-diamondCard--active {
+  border: 2px solid #111;
+}
+
+/* image */
+.rb-dImg {
+  padding: 12px;
+}
+
+.rb-imgWrap {
+  border-radius: 12px;
+  background: #f3f4f6;
+  overflow: hidden;
+}
+
+.rb-diamondImg {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* card text (THIS fixes your “text not visible” issue) */
+.rb-cardBody {
+  padding: 12px;
+  color: #111;
+}
+
+.rb-price {
+  font-weight: 900;
+  font-size: 18px;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.rb-title {
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.rb-sub {
+  font-size: 12px;
+  opacity: 0.75;
+  color: #111;
+}
+
+/* List view */
+.rb-listWrap {
+  display: grid;
+  gap: 10px;
+}
+
+.rb-listRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  color: #111;
+}
+
+.rb-listRow--active {
+  border: 2px solid #111;
+}
+
+.rb-listLeft {
+  display: grid;
+  gap: 4px;
+}
+
+.rb-listSub {
+  opacity: 0.8;
+  font-size: 13px;
+  color: #111;
+}
+
+/* weights helper */
+.rb-fw900 { font-weight: 900; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .rb-diamondGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .rb-diamondGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================
+   STEP 3 – Complete Ring
+========================= */
+
+.rb-step3 {
+  display: grid;
+  gap: 14px;
+  text-align: left;
+}
+
+/* Reuse rb-top + rb-h2 from Step2 CSS */
+
+/* Back button */
+.rb-secondaryBtn {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  color: #111;
+  font-weight: 800;
+}
+
+/* Two-column layout */
+.rb-step3Grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Card */
+.rb-step3Card {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 14px;
+  background: #fff;
+}
+
+/* Headings */
+.rb-h3 {
+  margin: 10px 0 8px;
+  color: #111;
+  font-weight: 900;
+}
+
+/* Save button */
+.rb-saveBtn {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #0b6;
+  background: #0b6;
+  color: #fff;
+  font-weight: 900;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.rb-saveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Messages */
+.rb-success {
+  margin-top: 10px;
+  color: #0b6;
+  font-weight: 700;
+}
+
+.rb-error {
+  margin-top: 10px;
+  color: tomato;
+  font-weight: 700;
+}
+
+.rb-note {
+  margin-top: 14px;
+  font-size: 12px;
+  opacity: 0.8;
+  color: #111;
+}
+
+/* Summary rows */
+.rb-summaryRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.rb-summaryLabel {
+  font-weight: 900;
+  color: #111;
+}
+
+.rb-summaryValue {
+  color: #111;
+  opacity: 0.95;
+}
+
+/* Divider */
+.rb-divider {
+  margin: 14px 0;
+  opacity: 0.25;
+}
+
+/* Price */
+.rb-mutedP {
+  opacity: 0.8;
+  color: #111;
+}
+
+.rb-total {
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.rb-breakdown {
+  display: grid;
+  gap: 8px;
+  opacity: 0.9;
+  color: #111;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .rb-step3Grid {
+    grid-template-columns: 1fr;
+  }
+}
