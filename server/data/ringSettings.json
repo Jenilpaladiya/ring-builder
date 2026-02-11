@@ -2,7 +2,7 @@
   "set-pave-band": {
     "basePrice": 2250,
     "compatibleShapes": ["Round", "Oval", "Princess", "Cushion", "Radiant"],
-    "imageUrl": "https://example.com/ring-settings/pave-band.jpg",
+    "imageUrl": "../images/ring-settings/set-pave-band.png",
     "name": "Pavé Band",
     "seededAt": "20 December 2025 at 17:43:03 UTC+1",
     "style": "Pavé"
@@ -10,9 +10,73 @@
   "set-hidden-halo": {
     "basePrice": 2450,
     "compatibleShapes": ["Round", "Oval", "Pear", "Cushion", "Radiant"],
-    "imageUrl": "https://example.com/ring-settings/hidden-halo.jpg",
+    "imageUrl": "/images/ring-settings/set-hidden-halo.png",
     "name": "Hidden Halo",
     "seededAt": "20 December 2025 at 17:43:03 UTC+1",
     "style": "Hidden Halo"
+  },
+  "set-three-stone": {
+    "basePrice": 2650,
+    "compatibleShapes": ["Round", "Oval", "Emerald", "Cushion", "Radiant"],
+    "imageUrl": "/images/ring-settings/set-three-stone.png",
+    "name": "Three-Stone",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Three-Stone"
+  },
+  "set-bezel": {
+    "basePrice": 2150,
+    "compatibleShapes": ["Round", "Oval", "Emerald", "Pear"],
+    "imageUrl": "/images/ring-settings/set-bezel.png",
+    "name": "Bezel",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Bezel"
+  },
+  "set-cathedral": {
+    "basePrice": 2350,
+    "compatibleShapes": ["Round", "Oval", "Princess", "Cushion"],
+    "imageUrl": "/images/ring-settings/set-cathedral.png",
+    "name": "Cathedral",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Cathedral"
+  },
+  "set-vintage-milgrain": {
+    "basePrice": 2550,
+    "compatibleShapes": ["Round", "Oval", "Emerald", "Marquise", "Pear"],
+    "imageUrl": "/images/ring-settings/set-vintage-milgrain.png",
+    "name": "Vintage / Milgrain",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Vintage / Milgrain"
+  },
+  "set-double-halo": {
+    "basePrice": 2850,
+    "compatibleShapes": ["Round", "Oval", "Cushion", "Radiant"],
+    "imageUrl": "/images/ring-settings/set-double-halo.png",
+    "name": "Double Halo",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Double Halo"
+  },
+  "set-side-stones": {
+    "basePrice": 2500,
+    "compatibleShapes": ["Round", "Oval", "Emerald", "Princess", "Cushion"],
+    "imageUrl": "/images/ring-settings/set-side-stones.png",
+    "name": "Side Stones",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Side Stones"
+  },
+  "set-split-shank": {
+    "basePrice": 2750,
+    "compatibleShapes": ["Round", "Oval", "Cushion", "Radiant", "Pear"],
+    "imageUrl": "/images/ring-settings/set-split-shank.png",
+    "name": "Split Shank",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Split Shank"
+  },
+  "set-twist-band": {
+    "basePrice": 2400,
+    "compatibleShapes": ["Round", "Oval", "Pear", "Marquise"],
+    "imageUrl": "/images/ring-settings/set-twist-band.png",
+    "name": "Twist Band",
+    "seededAt": "20 December 2025 at 17:43:03 UTC+1",
+    "style": "Twist"
   }
 }
