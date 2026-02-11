@@ -4,7 +4,7 @@ A step-by-step ring configurator where users select a **setting**, **center ston
 
 **Live Demo:** (add link)  
 **GitHub Repo:** https://github.com/Jenilpaladiya/ring-builder  
-**Demo Video:** (add link)
+**Demo Video:** https://drive.google.com/file/d/1RdMGm-IK_nPaWltYr-q4Y-TqXZTE37_H/view?usp=sharing
 
 ---
 
